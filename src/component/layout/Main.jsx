@@ -1,0 +1,18 @@
+import React, { useState } from "react";
+import Tambah from "./Tambah";
+import Hitung from "./Hitung";
+import Result from "./Result";
+
+const Main = ({ setPeserta, setStep, step, peserta }) => {
+  const [finalResult, setFinalResult] = useState([]);
+
+  return (
+    <main className="px-4 md:px-12 min-h-screen">
+      {step == 1 && <Tambah setPeserta={setPeserta} setStep={setStep} />}
+      {step == 2 && <Hitung peserta={peserta} setPeserta={setPeserta} setStep={setStep} setFinalResult={setFinalResult} />}
+      {step == 3 && <Result finalResult={finalResult}/>}
+    </main>
+  );
+};
+
+export default Main;

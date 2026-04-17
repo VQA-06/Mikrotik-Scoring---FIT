@@ -1,0 +1,41 @@
+import React, { useEffect, useState } from "react";
+import Title from "../single/text/Title";
+import Regular from "../single/text/Regular";
+import Btn from "../single/Btn";
+import InputNilai from "./InputNilai";
+
+const Hitung = ({ peserta, setPeserta, setStep, setFinalResult }) => {
+
+  useEffect(() => {
+    const p = [0.15, 0.05];
+
+    const hitung = peserta.map((i) => {
+      let h = 0;
+      Object.values(i.nilai).map((j, k) => {
+        k >= 5 && k <= 6 ? (h += j * p[k - 5]) : k == 7 ? (h -= j) : (h += j);
+      });
+      return {
+        id: i.id,
+        nama: i.nama,
+        nilaiFinal: h,
+      };
+    });
+
+    setFinalResult(hitung);
+  }, [peserta]);
+
+  const handleLanjut = () => {
+    setStep(3);
+  };
+
+  return (
+    <section className="py-4 flex flex-col gap-3 pb-10">
+      <Title teks={"Penilaian Keseluruhan"} />
+      <Regular teks={"Input seluruh nilai dari peserta yang terdaftar."} />
+      <InputNilai peserta={peserta} setPeserta={setPeserta}/>
+      <Btn teks={"Hitung & Lihat Hasil"} click={handleLanjut} />
+    </section>
+  );
+};
+
+export default Hitung;
