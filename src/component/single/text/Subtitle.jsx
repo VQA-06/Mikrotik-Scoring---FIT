@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Subtitle = ({teks}) => {
+const Subtitle = ({teks, color = 'primary'}) => {
   return (
-    <p className='text-primary text-2xl tracking-wider font-bold'>{teks}</p>
+    <p className={`text-${color} text-2xl tracking-wider font-bold`}>{teks}</p>
   )
 }
 

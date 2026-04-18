@@ -4,7 +4,7 @@ import Regular from "../single/text/Regular";
 import Btn from "../single/Btn";
 import InputNilai from "./InputNilai";
 
-const Hitung = ({ peserta, setPeserta, setStep, setFinalResult }) => {
+const Hitung = ({ peserta, setPeserta, setStep, setFinalResult, type }) => {
 
   useEffect(() => {
     const p = [0.15, 0.05];
@@ -12,7 +12,7 @@ const Hitung = ({ peserta, setPeserta, setStep, setFinalResult }) => {
     const hitung = peserta.map((i) => {
       let h = 0;
       Object.values(i.nilai).map((j, k) => {
-        k >= 5 && k <= 6 ? (h += j * p[k - 5]) : k == 7 ? (h -= j) : (h += j);
+        type == 'mikrotik' ? (k >= 5 && k <= 6 ? (h += j * p[k - 5]) : k == 7 ? (h -= j) : (h += j)) : k == 4 ? h -= j : h += j
       });
       return {
         id: i.id,
@@ -32,7 +32,7 @@ const Hitung = ({ peserta, setPeserta, setStep, setFinalResult }) => {
     <section className="py-4 flex flex-col gap-3 pb-10">
       <Title teks={"Penilaian Keseluruhan"} />
       <Regular teks={"Input seluruh nilai dari peserta yang terdaftar."} />
-      <InputNilai peserta={peserta} setPeserta={setPeserta}/>
+      <InputNilai peserta={peserta} setPeserta={setPeserta} type={type}/>
       <Btn teks={"Hitung & Lihat Hasil"} click={handleLanjut} />
     </section>
   );
