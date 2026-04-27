@@ -114,7 +114,7 @@ const Result = ({ finalResult, type }) => {
       type: Number,
       value: (data) => data.nilai[k.dKey],
       width: 30,
-      align: "left",
+      align: "center",
       fontSize: 12,
       borderColor: "#000000",
       borderStyle: "thin",
